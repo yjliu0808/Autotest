@@ -1,5 +1,8 @@
 package com.athena.utils;
 
+import com.athena.pojo.CaseInfo;
+
+import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -10,6 +13,37 @@ import static io.restassured.RestAssured.given;
  * @Author:Athena
  */
 public class HttpUtils {
+    /**
+    * @ Author:Athena
+    * @ Date 2022/3/19 12:46
+    * @ Description //获取默认请求头方法
+    * @ Param[]
+    * @ return java.util.Map<java.lang.String,java.lang.Object>
+    */
+    public static Map<String,Object> getDefaulHeaders(){
+        //准备请求头数据
+        Map<String,Object> headers = new HashMap<String, Object>();
+        headers.put("Content-Type", "application/json");
+        return headers;
+    }
+    public static String call(CaseInfo caseInfo,Map<String,Object> headers){
+        //1.获取请求参数
+        String url = caseInfo.getUrl();
+        String params = caseInfo.getParams();
+        String type = caseInfo.getType();
+        //2.请求判断类型
+        String body = null;
+        if("post".equals(type)){
+
+            body = HttpUtils.mypost(url,headers,params);
+        }else if("get".equals(type)){
+            body = HttpUtils.myget(url,headers);
+        }else if("patch".equals(type)){
+            body = HttpUtils.mypatch(url,headers,params);
+        }
+        System.out.println(body);
+        return body;
+    }
     /**
     * @ Author:Athena
     * @ Date 2022/3/17 22:10
