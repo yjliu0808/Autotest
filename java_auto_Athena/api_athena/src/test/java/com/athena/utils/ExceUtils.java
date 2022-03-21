@@ -54,10 +54,8 @@ public class ExceUtils {
     * @ return void
     */
     public static void backWrite() throws Exception{
-        System.out.println("测试1");
         //excel批量回写操作
         FileInputStream fis = new FileInputStream(Constans.EXCEl_PATH);
-        System.out.println(Constans.EXCEl_PATH);
         Workbook sheets = WorkbookFactory.create(fis);
         //循环遍历writeBackData集合
         for(WriteBackData writeBackData:responseWriteList) {
@@ -79,6 +77,6 @@ public class ExceUtils {
         sheets.write(fos);
         fis.close();
         fos.close();
-        System.out.println("测试11");
+
     }
 }

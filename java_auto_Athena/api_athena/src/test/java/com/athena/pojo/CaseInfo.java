@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 public class CaseInfo {
  //  Name接口名称  CaseId用例ID	Desc用例描述	Url接口地址	ContentType格式	Type接口提交类型	Params参数
     @Excel(name="Name接口名称")
-    private String name;//属性的命名遵循小驼峰
+    private String name;//属性的命名遵循小驼峰,否则无法和excel列对应
 
     @Excel(name="CaseId用例ID")
     private  int caseId;
@@ -32,6 +32,9 @@ public class CaseInfo {
     @Excel(name="Params参数")
     private String params;
 
+    @Excel(name="expected期望结果")
+    private String expected;
+
     @Override
     public String toString() {
         return "CaseInfo{" +
@@ -42,7 +45,22 @@ public class CaseInfo {
                 ", contentType='" + contentType + '\'' +
                 ", type='" + type + '\'' +
                 ", params='" + params + '\'' +
+                ", expected='" + expected + '\'' +
                 '}';
+    }
+
+    public CaseInfo() {
+    }
+
+    public CaseInfo(String name, int caseId, String desc, String url, String contentType, String type, String params, String expected) {
+        this.name = name;
+        this.caseId = caseId;
+        this.desc = desc;
+        this.url = url;
+        this.contentType = contentType;
+        this.type = type;
+        this.params = params;
+        this.expected = expected;
     }
 
     public String getName() {
@@ -99,5 +117,13 @@ public class CaseInfo {
 
     public void setParams(String params) {
         this.params = params;
+    }
+
+    public String getExpected() {
+        return expected;
+    }
+
+    public void setExpected(String expected) {
+        this.expected = expected;
     }
 }

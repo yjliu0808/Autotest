@@ -34,7 +34,6 @@ public class HttpUtils {
         //2.请求判断类型
         String body = null;
         if("post".equals(type)){
-
             body = HttpUtils.mypost(url,headers,params);
         }else if("get".equals(type)){
             body = HttpUtils.myget(url,headers);

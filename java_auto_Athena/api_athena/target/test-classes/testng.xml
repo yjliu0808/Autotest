@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Athena项目">
-<!--    <test name="注册接口">
+ <!--   <test name="注册接口">
         <classes>
             <class name="com.athena.cases.RegisterCase"></class>
             <parameter name="startSheetIndex" value="0"></parameter>
@@ -15,31 +15,24 @@
             <parameter name="sheetNum" value="1"></parameter>
         </classes>
     </test>
-<!--    <test name="voc首页查询">
-        <classes>
-            <class name="com.athena.cases.LoginCase"></class>
-            <parameter name="startSheetIndex" value="2"></parameter>
-            <parameter name="sheetNum" value="2"></parameter>
-        </classes>
-    </test>
-    <test name="Activiti登录">
+<!--    <test name="Activiti登录">
         <classes>
             <class name="com.athena.cases.LoginActivitiCase"></class>
-            <parameter name="startSheetIndex" value="3"></parameter>
+            <parameter name="startSheetIndex" value="2"></parameter>
             <parameter name="sheetNum" value="1"></parameter>
         </classes>
     </test>
     <test name="Activiti新增模型">
         <classes>
             <class name="com.athena.cases.AddMoudActivitiCase"></class>
-            <parameter name="startSheetIndex" value="4"></parameter>
+            <parameter name="startSheetIndex" value="3"></parameter>
             <parameter name="sheetNum" value="1"></parameter>
         </classes>
-    </test>-->
-   <!-- <test name="Activiti查询模型">
+    </test>
+    <test name="Activiti查询模型">
         <classes>
-            <class name="com.athena.cases.LoginCase"></class>
-            <parameter name="startSheetIndex" value="5"></parameter>
+            <class name="com.athena.cases.SelectActivitiCase"></class>
+            <parameter name="startSheetIndex" value="4"></parameter>
             <parameter name="sheetNum" value="1"></parameter>
         </classes>
     </test>-->
