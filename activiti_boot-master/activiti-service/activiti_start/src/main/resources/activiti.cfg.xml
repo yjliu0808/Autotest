@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="processEngineConfiguration"
+          class="org.activiti.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration">
+
+        <!-- 配置数据相关的信息 -->
+        <!-- 数据库驱动 -->
+        <property name="jdbcDriver" value="com.mysql.jdbc.Driver" />
+        <!-- 数据库链接，防止插入中文数据乱码，要加上字符集 characterEncoding=utf8 -->
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/activiti?nullCatalogMeansCurrent=true&amp;characterEncoding=utf8" />
+        <!-- 数据库用户名 -->
+        <property name="jdbcUsername" value="root" />
+        <!-- 数据库密码 -->
+        <property name="jdbcPassword" value="rootroot" />
+        <!-- activiti 数据库表生成策略-->
+        <!--
+        自动更新数据库表结构
+        true：适用开发环境，默认值。activiti会对数据库中所有表进行更新操作。如果表不存在，则自动创建
+        false：适用生产环境。activiti在启动时，对比数据库表中保存的版本，如果没有表或者版本不匹配将抛出异常
+        create_drop： 在activiti启动时创建表，在关闭时删除表（必须手动关闭引擎，才能删除表）
+        create_drop： 在activiti启动时创建表，在关闭时删除表（必须手动关闭引擎，才能删除表）
+        -->
+        <property name="databaseSchemaUpdate" value="true" />
+    </bean>
+</beans>

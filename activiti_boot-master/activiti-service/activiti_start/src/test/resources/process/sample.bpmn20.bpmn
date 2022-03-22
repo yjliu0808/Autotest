@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.sunline.cn">
+  <process id="sample" name="流程设计示例" isExecutable="true">
+    <startEvent id="Start" name="开始">
+      <extensionElements>
+        <activiti:executionListener event="start" class="com.grey.bpm.tools.StartListener"></activiti:executionListener>
+      </extensionElements>
+    </startEvent>
+    <userTask id="UserTaskSample" name="人工节点示例" activiti:assignee="${creator}"></userTask>
+    <serviceTask id="ServiceTaskSample" name="自动节点示例" activiti:class="com.grey.bpm.tools.ServerTask"></serviceTask>
+    <receiveTask id="ReceiveTaskSample" name="等待接收节点示例"></receiveTask>
+    <exclusiveGateway id="ExGateway" name="排他网关示例"></exclusiveGateway>
+    <sequenceFlow id="startToUser" name="流程开始" sourceRef="Start" targetRef="UserTaskSample"></sequenceFlow>
+    <sequenceFlow id="userToService" name="人工到自动" sourceRef="UserTaskSample" targetRef="ServiceTaskSample"></sequenceFlow>
+    <sequenceFlow id="serviceToGateway" name="自动到网关" sourceRef="ServiceTaskSample" targetRef="ExGateway"></sequenceFlow>
+    <sequenceFlow id="gatewayToUser" name="自动退回人工处理" sourceRef="ExGateway" targetRef="UserTaskSample">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${flow=="backToUser"}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="gatewayToReceive" name="提交等待节点" sourceRef="ExGateway" targetRef="ReceiveTaskSample">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${flow=="toReceive"}]]></conditionExpression>
+    </sequenceFlow>
+    <parallelGateway id="fork" name="并行开始点"></parallelGateway>
+    <sequenceFlow id="receiveToFork" name="等到并行分支网关" sourceRef="ReceiveTaskSample" targetRef="fork"></sequenceFlow>
+    <serviceTask id="ParaServiceTask" name="并行自动节点" activiti:class="com.grey.bpm.tools.ServerTask"></serviceTask>
+    <userTask id="ParalUserTask" name="并行人工节点" activiti:assignee="${assignee}"></userTask>
+    <sequenceFlow id="forkToUser" name="并行到人工" sourceRef="fork" targetRef="ParalUserTask">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${flow=="1"}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="forkToServiceTask" name="并行到自动" sourceRef="fork" targetRef="ParaServiceTask">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${flow=="2"}]]></conditionExpression>
+    </sequenceFlow>
+    <parallelGateway id="join" name="并行汇聚节点"></parallelGateway>
+    <sequenceFlow id="userToJoin" name="人工汇聚" sourceRef="ParalUserTask" targetRef="join"></sequenceFlow>
+    <sequenceFlow id="ServiceToJoin" name="自动汇聚" sourceRef="ParaServiceTask" targetRef="join"></sequenceFlow>
+    <endEvent id="endevent1" name="End">
+      <extensionElements>
+        <activiti:executionListener event="start" class="com.grey.bpm.tools.EndListener"></activiti:executionListener>
+      </extensionElements>
+    </endEvent>
+    <sequenceFlow id="joinToEdn" name="结束" sourceRef="join" targetRef="endevent1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_sample">
+    <bpmndi:BPMNPlane bpmnElement="sample" id="BPMNPlane_sample">
+      <bpmndi:BPMNShape bpmnElement="Start" id="BPMNShape_Start">
+        <omgdc:Bounds height="35.0" width="35.0" x="56.0" y="210.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="UserTaskSample" id="BPMNShape_UserTaskSample">
+        <omgdc:Bounds height="55.0" width="105.0" x="180.0" y="200.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTaskSample" id="BPMNShape_ServiceTaskSample">
+        <omgdc:Bounds height="55.0" width="105.0" x="440.0" y="200.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ReceiveTaskSample" id="BPMNShape_ReceiveTaskSample">
+        <omgdc:Bounds height="85.0" width="105.0" x="670.0" y="185.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ExGateway" id="BPMNShape_ExGateway">
+        <omgdc:Bounds height="40.0" width="40.0" x="472.0" y="40.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="fork" id="BPMNShape_fork">
+        <omgdc:Bounds height="40.0" width="40.0" x="920.0" y="207.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ParaServiceTask" id="BPMNShape_ParaServiceTask">
+        <omgdc:Bounds height="55.0" width="105.0" x="1040.0" y="330.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ParalUserTask" id="BPMNShape_ParalUserTask">
+        <omgdc:Bounds height="55.0" width="105.0" x="1040.0" y="89.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="join" id="BPMNShape_join">
+        <omgdc:Bounds height="40.0" width="40.0" x="1200.0" y="227.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="1290.0" y="230.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="startToUser" id="BPMNEdge_startToUser">
+        <omgdi:waypoint x="91.0" y="227.0"></omgdi:waypoint>
+        <omgdi:waypoint x="180.0" y="227.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="16.0" width="64.0" x="99.0" y="220.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="userToService" id="BPMNEdge_userToService">
+        <omgdi:waypoint x="285.0" y="227.0"></omgdi:waypoint>
+        <omgdi:waypoint x="440.0" y="227.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="16.0" width="80.0" x="319.0" y="227.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="serviceToGateway" id="BPMNEdge_serviceToGateway">
+        <omgdi:waypoint x="492.0" y="200.0"></omgdi:waypoint>
+        <omgdi:waypoint x="492.0" y="80.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="16.0" width="80.0" x="460.0" y="141.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="gatewayToUser" id="BPMNEdge_gatewayToUser">
+        <omgdi:waypoint x="492.0" y="80.0"></omgdi:waypoint>
+        <omgdi:waypoint x="232.0" y="200.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="48.0" width="96.0" x="391.0" y="117.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="gatewayToReceive" id="BPMNEdge_gatewayToReceive">
+        <omgdi:waypoint x="492.0" y="80.0"></omgdi:waypoint>
+        <omgdi:waypoint x="722.0" y="185.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="16.0" width="96.0" x="530.0" y="117.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="receiveToFork" id="BPMNEdge_receiveToFork">
+        <omgdi:waypoint x="775.0" y="227.0"></omgdi:waypoint>
+        <omgdi:waypoint x="920.0" y="227.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="48.0" width="100.0" x="799.0" y="217.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="forkToUser" id="BPMNEdge_forkToUser">
+        <omgdi:waypoint x="940.0" y="207.0"></omgdi:waypoint>
+        <omgdi:waypoint x="940.0" y="116.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1040.0" y="116.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="16.0" width="100.0" x="910.0" y="154.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="forkToServiceTask" id="BPMNEdge_forkToServiceTask">
+        <omgdi:waypoint x="940.0" y="247.0"></omgdi:waypoint>
+        <omgdi:waypoint x="940.0" y="357.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1040.0" y="357.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="16.0" width="100.0" x="920.0" y="299.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="userToJoin" id="BPMNEdge_userToJoin">
+        <omgdi:waypoint x="1145.0" y="116.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1220.0" y="116.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1220.0" y="227.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="16.0" width="64.0" x="1190.0" y="120.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="ServiceToJoin" id="BPMNEdge_ServiceToJoin">
+        <omgdi:waypoint x="1145.0" y="357.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1220.0" y="357.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1220.0" y="267.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="16.0" width="64.0" x="1199.0" y="340.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="joinToEdn" id="BPMNEdge_joinToEdn">
+        <omgdi:waypoint x="1240.0" y="247.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1290.0" y="247.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="16.0" width="32.0" x="1240.0" y="247.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
