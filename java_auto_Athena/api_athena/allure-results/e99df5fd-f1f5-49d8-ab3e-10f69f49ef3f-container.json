@@ -1,0 +1,1 @@
+{"uuid":"e99df5fd-f1f5-49d8-ab3e-10f69f49ef3f","name":"com.athena.cases.LoginCase","start":1648129687063,"stop":1648129687586,"children":["2c424a3d-b7b8-4dea-9335-28ca8dcb1c85"],"befores":[{"name":"beforeClas","status":"passed","stage":"finished","description":"","start":1648129687082,"stop":1648129687082}]}

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="5" passed="5">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Athena项目" duration-ms="12960" started-at="2022-03-24T22:24:24 CST" finished-at="2022-03-24T22:24:37 CST">
+    <groups>
+    </groups>
+    <test name="登录接口" duration-ms="12960" started-at="2022-03-24T22:24:24 CST" finished-at="2022-03-24T22:24:37 CST">
+      <class name="com.athena.cases.LoginCase">
+        <test-method status="PASS" signature="steup()[pri:0, instance:com.athena.cases.LoginCase@4648ce9]" name="steup" is-config="true" duration-ms="97" started-at="2022-03-24T22:24:24 CST" finished-at="2022-03-24T22:24:24 CST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- steup -->
+        <test-method status="PASS" signature="beforeClas(int, int)[pri:0, instance:com.athena.cases.LoginCase@4648ce9]" name="beforeClas" is-config="true" duration-ms="14" started-at="2022-03-24T22:24:24 CST" finished-at="2022-03-24T22:24:24 CST">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClas -->
+        <test-method status="PASS" signature="loginCase(com.athena.pojo.CaseInfo)[pri:0, instance:com.athena.cases.LoginCase@4648ce9]" name="loginCase" duration-ms="8097" started-at="2022-03-24T22:24:28 CST" data-provider="datas" finished-at="2022-03-24T22:24:36 CST">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[CaseInfo{name='登录', caseId=1, desc='传手机号,不传密码', url='http://192.168.86.136:8080/app/mobile/api/user/login', contentType='json', type='post', params='{"mobile":"35696874502","password":"","gqid":"4000002"}', expected='{"$.code":8,"$.msg":"登陆失败"}'}]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginCase -->
+        <test-method status="PASS" signature="AfterMethod()[pri:0, instance:com.athena.cases.LoginCase@4648ce9]" name="AfterMethod" is-config="true" duration-ms="3" started-at="2022-03-24T22:24:36 CST" finished-at="2022-03-24T22:24:36 CST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AfterMethod -->
+        <test-method status="PASS" signature="loginCase(com.athena.pojo.CaseInfo)[pri:0, instance:com.athena.cases.LoginCase@4648ce9]" name="loginCase" duration-ms="459" started-at="2022-03-24T22:24:36 CST" data-provider="datas" finished-at="2022-03-24T22:24:37 CST">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[CaseInfo{name='登录', caseId=2, desc='不传手机号，传密码', url='http://192.168.86.136:8080/app/mobile/api/user/login', contentType='json', type='post', params='{"mobile":"","password":"123456","gqid":"4000002"}', expected='{"$.code":0,"$.msg":"成功调用","$.data.id":80}'}]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginCase -->
+        <test-method status="PASS" signature="AfterMethod()[pri:0, instance:com.athena.cases.LoginCase@4648ce9]" name="AfterMethod" is-config="true" duration-ms="2" started-at="2022-03-24T22:24:37 CST" finished-at="2022-03-24T22:24:37 CST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AfterMethod -->
+        <test-method status="PASS" signature="loginCase(com.athena.pojo.CaseInfo)[pri:0, instance:com.athena.cases.LoginCase@4648ce9]" name="loginCase" duration-ms="174" started-at="2022-03-24T22:24:37 CST" data-provider="datas" finished-at="2022-03-24T22:24:37 CST">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[CaseInfo{name='登录', caseId=3, desc='不合格的手机号', url='http://192.168.86.136:8080/app/mobile/api/user/login', contentType='json', type='post', params='{"mobile":"35696874502000000","password":"123456","gqid":"4000002"}', expected='{"$.code":5,"$.msg":"用户不存在"}'}]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginCase -->
+        <test-method status="PASS" signature="AfterMethod()[pri:0, instance:com.athena.cases.LoginCase@4648ce9]" name="AfterMethod" is-config="true" duration-ms="1" started-at="2022-03-24T22:24:37 CST" finished-at="2022-03-24T22:24:37 CST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AfterMethod -->
+        <test-method status="PASS" signature="loginCase(com.athena.pojo.CaseInfo)[pri:0, instance:com.athena.cases.LoginCase@4648ce9]" name="loginCase" duration-ms="259" started-at="2022-03-24T22:24:37 CST" data-provider="datas" finished-at="2022-03-24T22:24:37 CST">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[CaseInfo{name='登录', caseId=4, desc='合格的手机号+不合格密码', url='http://192.168.86.136:8080/app/mobile/api/user/login', contentType='json', type='post', params='{"mobile":"35696874502","password":"123456111","gqid":"4000002"}', expected='{"$.code":8,"$.msg":"登陆失败"}'}]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginCase -->
+        <test-method status="PASS" signature="AfterMethod()[pri:0, instance:com.athena.cases.LoginCase@4648ce9]" name="AfterMethod" is-config="true" duration-ms="1" started-at="2022-03-24T22:24:37 CST" finished-at="2022-03-24T22:24:37 CST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AfterMethod -->
+        <test-method status="PASS" signature="loginCase(com.athena.pojo.CaseInfo)[pri:0, instance:com.athena.cases.LoginCase@4648ce9]" name="loginCase" duration-ms="150" started-at="2022-03-24T22:24:37 CST" data-provider="datas" finished-at="2022-03-24T22:24:37 CST">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[CaseInfo{name='登录', caseId=5, desc='合格手机号+合格密码', url='http://192.168.86.136:8080/app/mobile/api/user/login', contentType='json', type='post', params='{"mobile":"15196174070","password":"123456","gqid":"4000002"}', expected='{"$.code":0,"$.msg":"成功调用"}'}]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginCase -->
+        <test-method status="PASS" signature="AfterMethod()[pri:0, instance:com.athena.cases.LoginCase@4648ce9]" name="AfterMethod" is-config="true" duration-ms="1" started-at="2022-03-24T22:24:37 CST" finished-at="2022-03-24T22:24:37 CST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AfterMethod -->
+        <test-method status="PASS" signature="resWriteExcel()[pri:0, instance:com.athena.cases.LoginCase@4648ce9]" name="resWriteExcel" is-config="true" duration-ms="927" started-at="2022-03-24T22:24:37 CST" finished-at="2022-03-24T22:24:38 CST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- resWriteExcel -->
+      </class> <!-- com.athena.cases.LoginCase -->
+    </test> <!-- 登录接口 -->
+  </suite> <!-- Athena项目 -->
+</testng-results>

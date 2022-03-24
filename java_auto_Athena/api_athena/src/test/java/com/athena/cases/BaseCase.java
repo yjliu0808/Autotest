@@ -8,10 +8,7 @@ import com.athena.utils.ExceUtils;
 import com.athena.utils.UserData;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 import java.util.Map;
 import java.util.Set;
@@ -42,6 +39,10 @@ public class BaseCase {
         UserData.vars.put("${user}","15196174070");
         UserData.vars.put("${pwd}","123456");
         UserData.vars.put("${gqid}","4000002");
+    }
+    @AfterMethod
+    public void AfterMethod(){
+        logger.info("====================================");
     }
     //excel中开始及数量的全局变量
     public  int  startSheetIndex;
