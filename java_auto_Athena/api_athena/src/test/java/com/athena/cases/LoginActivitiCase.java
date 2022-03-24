@@ -37,7 +37,6 @@ public class LoginActivitiCase extends BaseCase{
         //	5、添加接口响应回写内容:回写=excel修改操作
         addresDataList(caseInfo.getCaseId(), Constans.RESPONSE_CELLNUM,startSheetIndex,body);
         //	6、数据库后置查询结果
-
         //	7、据库断言
         //	8、添加断言回写内容
         //	9、添加日志

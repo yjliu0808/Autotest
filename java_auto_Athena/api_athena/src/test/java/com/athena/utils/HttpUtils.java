@@ -1,6 +1,8 @@
 package com.athena.utils;
 
+import com.athena.cases.BaseCase;
 import com.athena.pojo.CaseInfo;
+import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +15,7 @@ import static io.restassured.RestAssured.given;
  * @Author:Athena
  */
 public class HttpUtils {
+    private static Logger logger = Logger.getLogger(HttpUtils.class);
     /**
     * @ Author:Athena
     * @ Date 2022/3/19 12:46
@@ -40,7 +43,11 @@ public class HttpUtils {
         }else if("patch".equals(type)){
             body = HttpUtils.mypatch(url,headers,params);
         }
-        System.out.println(body);
+        logger.info("请求url:"+url);
+        logger.info("请求头:"+headers);
+        logger.info("请求参数:"+params);
+        logger.info("响应结果:"+body);
+
         return body;
     }
     /**

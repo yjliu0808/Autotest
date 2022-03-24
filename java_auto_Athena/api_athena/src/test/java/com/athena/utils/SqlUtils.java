@@ -83,7 +83,7 @@ public class SqlUtils {
             conn = JDBCUtils.getConnection();
             ScalarHandler handler = new ScalarHandler();
             result = runner.query(conn, sql, handler);
-            System.out.println("查询结果:"+result);
+            logger.info("查询结果:"+result);
         } catch (SQLException e) {
             logger.error(e.getMessage());
         } finally {

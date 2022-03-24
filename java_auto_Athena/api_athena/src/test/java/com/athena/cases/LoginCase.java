@@ -1,9 +1,6 @@
 package com.athena.cases;
 import com.athena.pojo.CaseInfo;
-import com.athena.utils.Constans;
-import com.athena.utils.ExceUtils;
-import com.athena.utils.HttpUtils;
-import com.athena.utils.UserData;
+import com.athena.utils.*;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -34,13 +31,18 @@ public class LoginCase extends BaseCase{
         //响应体重获取的token存储到map
         responseUserData(body,"$.data.token","token");
         //	4、json响应结果断言  (设置多字段的断言)
-        responseAssert(caseInfo,body);
+        boolean resassertResult = responseAssert(caseInfo,body);
         //	5、添加接口响应回写内容:回写=excel修改操作
         addresDataList(caseInfo.getCaseId(),Constans.RESPONSE_CELLNUM,startSheetIndex,body);
         //	6、数据库后置查询结果
+        //Object afterSqlResult = SqlUtils.getSingleResult(); 暂时省略,待云服务器部署后再补全断言
         //	7、据库断言
+        boolean sqlResult = true;
         //	8、添加断言回写内容
+        String assertResult =resassertResult && sqlResult ? "success":"failed";
+        addresDataList(caseInfo.getCaseId(),Constans.RESPONSE_SQL,startSheetIndex,assertResult);
         //	9、添加日志
+
         //	10、报表断言
     }
     @DataProvider

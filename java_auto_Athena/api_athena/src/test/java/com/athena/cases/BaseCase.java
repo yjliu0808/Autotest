@@ -4,10 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPath;
 import com.athena.pojo.CaseInfo;
 import com.athena.pojo.WriteBackData;
-import com.athena.utils.Constans;
 import com.athena.utils.ExceUtils;
 import com.athena.utils.UserData;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
@@ -22,6 +22,7 @@ import java.util.Set;
  * @Author:Athena
  */
 public class BaseCase {
+    private Logger logger = Logger.getLogger(BaseCase.class);
     public void paramsReplace(CaseInfo caseInfo){
         String params = caseInfo.getParams();
         Set<String> keySet = UserData.vars.keySet();
@@ -36,7 +37,7 @@ public class BaseCase {
     }
     @BeforeSuite
     public void steup(){
-        System.out.println("------------steup");
+        logger.info("----------开始执行测试-----------------");
         //参数化,提前存值
         UserData.vars.put("${user}","15196174070");
         UserData.vars.put("${pwd}","123456");
@@ -107,12 +108,16 @@ public class BaseCase {
             Object actulValue = JSONPath.read(body, key);
             //期望和实际比较
             if (!expectedValue.equals(actulValue)) {
-                System.out.println("断言失败:"+ "\n"+ "实际值=" + actulValue + "期望值=" + expectedValue);
+                logger.error("断言失败:"+ "json表达式:"+key+",实际值=" + actulValue + ",期望值=" + expectedValue);
+
                 resResult = false;
             }
-        }
+
         if (resResult==true) {
-            System.out.println("断言成功");
+            logger.info("断言失败:"+ "json表达式:"+key+",实际值=" + actulValue + ",期望值=" + expectedValue);
+
+
+        }
         }
         return resResult;
     }
